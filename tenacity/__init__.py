@@ -404,7 +404,7 @@ class Retrying(BaseRetrying):
             do = self.iter(retry_state=retry_state)
             if isinstance(do, DoAttempt):
                 try:
-                    result = fn(*args, **kwargs)
+                    result = fn(*retry_state.args, **retry_state.kwargs)
                 except BaseException:  # noqa: B902
                     retry_state.set_exception(sys.exc_info())
                 else:
